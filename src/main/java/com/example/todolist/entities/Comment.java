@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -15,16 +13,23 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "comments")
-public class Comment{
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private LocalDate createdAt;
-    private LocalDate updatedAt;
+    @Column(nullable = false, length = 300)
     private String text;
 
-//    // One to many
-//    // ?????
-//    private List<Todo> todoes;
+    @Column(nullable = false)
+    private LocalDate createdAt;
+
+    private LocalDate updatedAt;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "todo_id", nullable = false,
+            foreignKey = @ForeignKey(name = "FK_comments_todos"))
+    private Todo todo;
 }

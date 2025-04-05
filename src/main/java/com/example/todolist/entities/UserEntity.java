@@ -1,10 +1,9 @@
 package com.example.todolist.entities;
 
-import com.example.todolist.entities.enums.*;
+import com.example.todolist.entities.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,15 +18,14 @@ import java.util.List;
 public class UserEntity {
 
     {
-        status = Status.ACTIVE;
         role = Role.USER;
     }
+
     @PrePersist
     public void prePersist() {
-        if (status == null)
-            status = Status.ACTIVE;
-        if (role == null)
+        if (role == null) {
             role = Role.USER;
+        }
     }
 
     @Id
@@ -45,10 +43,6 @@ public class UserEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Status status;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(nullable = false, length = 50)
@@ -56,9 +50,11 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDate createdAt;
+
     private LocalDate updatedAt;
 
-//    // One to many
-//    // ?????
-//    private List<Todo> todoes;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Todo> todos;
 }

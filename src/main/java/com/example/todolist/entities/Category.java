@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.util.List;
 
 @Getter
@@ -16,16 +14,22 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "categories")
-public class Category{
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false, length = 50)
     private String name;
+
+    @Column(nullable = false)
     private LocalDate createdAt;
+
     private LocalDate updatedAt;
 
-//    // One to many
-//    // ?????
-//    private List<Todo> todoes;
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    private List<Todo> todos;
 }
