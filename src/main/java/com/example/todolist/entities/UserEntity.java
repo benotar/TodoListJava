@@ -1,19 +1,60 @@
 package com.example.todolist.entities;
 
-import jakarta.persistence.Table;
+import com.example.todolist.entities.enums.Role;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
-@Table(name = "Users")
-public class UserEntity extends BaseEntity {
-    private String userName;
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "users")
+public class UserEntity {
 
-    // ? Hash for password
-    //private string passwordHash;
+    {
+        role = Role.USER;
+    }
 
+    @PrePersist
+    public void prePersist() {
+        if (role == null) {
+            role = Role.USER;
+        }
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String username;
+
+    @Column(nullable = false)
+    private String passwordHash;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(nullable = false, length = 50)
     private String name;
 
-    // One to many
-    // ?????
-    private List<Todo> todoes;
+    @Column(nullable = false)
+    private LocalDate createdAt;
+
+    private LocalDate updatedAt;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Todo> todos;
 }
