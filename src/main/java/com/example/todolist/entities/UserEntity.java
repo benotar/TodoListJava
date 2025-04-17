@@ -1,15 +1,18 @@
 package com.example.todolist.entities;
 
 import com.example.todolist.entities.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,15 +20,20 @@ import java.util.List;
 @Table(name = "users")
 public class UserEntity {
 
-    {
-        role = Role.USER;
-    }
-
     @PrePersist
     public void prePersist() {
         if (role == null) {
             role = Role.USER;
         }
+        this.createdAt = LocalDate.now();
+        if (this.updatedAt == null) {
+            this.updatedAt = LocalDate.now();
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDate.now();
     }
 
     @Id
@@ -53,6 +61,7 @@ public class UserEntity {
 
     private LocalDate updatedAt;
 
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
