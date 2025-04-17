@@ -1,5 +1,6 @@
 package com.example.todolist.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +21,15 @@ public class Todo {
     @PrePersist
     public void prePersist() {
         completed = false;
+        this.createdAt = LocalDate.now();
+        if (this.updatedAt == null) {
+            this.updatedAt = LocalDate.now();
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDate.now();
     }
 
     @Id
@@ -61,6 +71,7 @@ public class Todo {
             foreignKey = @ForeignKey(name = "FK_todos_tags"))
     private Tag tag;
 
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "todo", fetch = FetchType.LAZY)

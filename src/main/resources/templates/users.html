@@ -4,22 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container input, .form-container select {
+            margin: 5px;
+            padding: 5px;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-<div class="">
-    <form th:action="@{/users-form}" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="email" name="email" placeholder="Email">
-        <input type="text" name="name" placeholder="Name">
+<div class="nav-links">
+    <a th:href="@{/users}">Users</a>
+    <a th:href="@{/todos}">Todos</a>
+</div>
+
+<div class="form-container">
+    <form th:action="@{/add-users-form}" method="post">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="name" placeholder="Name" required>
         <select name="role" id="role">
             <option th:each="roleConst : ${T(com.example.todolist.entities.enums.Role).values()}"
                     th:value="${roleConst.name()}"
-                    th:utext="${roleConst.name()}"
-            ></option>
+                    th:utext="${roleConst.name()}"></option>
         </select>
         <button type="submit">Submit</button>
     </form>
 </div>
+
+<h2>Users List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Login</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td><input type="text" th:value="${user.username}" readonly/></td>
+        <td><input type="email" th:value="${user.email}" readonly/></td>
+        <td th:text="${user.role}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .form-container input, .form-container select, .form-container textarea {
+            margin: 5px;
+            padding: 5px;
+        }
+        .nav-links {
+            margin-bottom: 20px;
+        }
+        .nav-links a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="nav-links">
+    <a th:href="@{/users}">Users</a>
+    <a th:href="@{/todos}">Todos</a>
+</div>
+
+<div class="form-container">
+    <form th:action="@{/add-todos-form}" method="post">
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input type="checkbox" name="completed" id="completed">
+        <label for="completed">Completed</label>
+        <select name="userId" id="userId" required>
+            <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+        </select>
+        <select name="categoryId" id="categoryId" required>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+        <select name="tagId" id="tagId" required>
+            <option th:each="tag : ${tags}" th:value="${tag.id}" th:text="${tag.name}"></option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<h2>Todos List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Completed</th>
+        <th>User</th>
+        <th>Category</th>
+        <th>Tag</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.title}"></td>
+        <td th:text="${todo.description}"></td>
+        <td th:text="${todo.completed}"></td>
+        <td th:text="${todo.user.username}"></td>
+        <td th:text="${todo.category.name}"></td>
+        <td th:text="${todo.tag.name}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

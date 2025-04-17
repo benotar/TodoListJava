@@ -1,5 +1,6 @@
 package com.example.todolist.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +18,19 @@ import java.util.List;
 @Table(name = "categories")
 public class Category {
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDate.now();
+        if (this.updatedAt == null) {
+            this.updatedAt = LocalDate.now();
+        }
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDate.now();
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -29,6 +43,7 @@ public class Category {
 
     private LocalDate updatedAt;
 
+    @JsonIgnore
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
