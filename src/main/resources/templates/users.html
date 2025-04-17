@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+<div class="">
+    <form th:action="@{/users-form}" method="post">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="email" name="email" placeholder="Email">
+        <input type="text" name="name" placeholder="Name">
+        <select name="role" id="role">
+            <option th:each="roleConst : ${T(com.example.todolist.entities.enums.Role).values()}"
+                    th:value="${roleConst.name()}"
+                    th:utext="${roleConst.name()}"
+            ></option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
