@@ -17,10 +17,10 @@ import java.util.List;
 @TestConfiguration
 public class EntitiesGenerator {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Lazy
     @Autowired
@@ -31,8 +31,8 @@ public class EntitiesGenerator {
     public List<UserEntity> userEntityList() {
         return List.of(
                 UserEntity.builder()
-                        .username("user1")
-                        .passwordHash(passwordEncoder.encode("pass1"))
+                        .username("a")
+                        .passwordHash(passwordEncoder.encode("a"))
                         .email("user1@example.com")
                         .role(Role.USER)
                         .name("User One")

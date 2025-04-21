@@ -4,11 +4,13 @@ import com.example.todolist.data.services.CategoryService;
 import com.example.todolist.data.services.TagService;
 import com.example.todolist.data.services.TodoService;
 import com.example.todolist.data.services.UserEntityService;
+import com.example.todolist.data.services.qualifiers.TodoServiceDbQualifier;
 import com.example.todolist.entities.Category;
 import com.example.todolist.entities.Tag;
 import com.example.todolist.entities.Todo;
 import com.example.todolist.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +21,14 @@ import java.util.List;
 
 @Controller
 public class TodoController {
+
     private final TodoService todoService;
     private final UserEntityService userEntityService;
     private final CategoryService categoryService;
     private final TagService tagService;
 
     @Autowired
-    public TodoController(TodoService todoService, UserEntityService userEntityService, CategoryService categoryService, TagService tagService) {
+    public TodoController(@TodoServiceDbQualifier TodoService todoService, UserEntityService userEntityService, CategoryService categoryService, TagService tagService) {
         this.todoService = todoService;
         this.userEntityService = userEntityService;
         this.categoryService = categoryService;

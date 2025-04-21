@@ -6,6 +6,7 @@ import com.example.todolist.entities.UserEntity;
 import com.example.todolist.entities.enums.Role;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,10 +19,17 @@ public class UserEntityServiceDb implements UserEntityService {
 
     @Autowired
     private UserEntityRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserEntity save(UserEntity user) {
-        return userRepository.save(user);
+        user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
+        System.out.println("save db: " + user);
+        UserEntity savedUserEntity =  userRepository.save(user);
+        System.out.println("save db: " + savedUserEntity);
+        return savedUserEntity;
     }
 
     @Override
@@ -72,5 +80,10 @@ public class UserEntityServiceDb implements UserEntityService {
     @Override
     public List<UserEntity> findByRole(Role role) {
         return userRepository.findByRole(role);
+    }
+
+    @Override
+    public Optional<UserEntity> findByUsernameIgnoreCase(String username) {
+        return userRepository.findByUsernameIgnoreCase(username);
     }
 }

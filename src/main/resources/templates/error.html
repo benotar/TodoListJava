@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:insert="~{fragments/settings :: settings-fragment}"/>
+	<title>Error Page</title>
+</head>
+<body>
+    <th:block th:insert="~{fragments/header :: header-fragment}"/>
+	<h1>:-(</h1>
+	<h3>Error</h3>
+	<a href="/">Go back to home page</a>
+	<h2 th:utext="${message}"></h2>
+</body>
+</html>

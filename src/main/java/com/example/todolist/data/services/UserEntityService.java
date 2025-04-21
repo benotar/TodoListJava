@@ -26,4 +26,6 @@ public interface UserEntityService {
     boolean existsByEmail(String email);
 
     List<UserEntity> findByRole(Role role);
+
+    Optional<UserEntity> findByUsernameIgnoreCase(String username);
 }

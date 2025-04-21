@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -38,12 +39,24 @@ public class UsersController {
             @RequestParam("role") String role) {
         UserEntity userEntity = UserEntity.builder()
                 .username(username)
-                .passwordHash(password) // Буде зашифровано в сервісі
+                .passwordHash(password)
                 .email(email)
                 .name(name)
                 .role(Role.valueOf(role))
                 .build();
         userEntityService.save(userEntity);
         return "redirect:/users";
+    }
+
+//    @PostMapping("/user-update-redirect-form")
+//    public ModelAndView userUpdateRedirect(@RequestParam("userId") Integer userId) {
+//        return new ModelAndView("redirect:/user-update", new ModelMap("userId", userId));
+//    }
+
+    @PostMapping("/user-update-redirect-form")
+    public String userUpdateRedirect(@RequestParam("userId") Integer userId,
+                                     RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("userId", userId);
+        return "redirect:/user-update";
     }
 }

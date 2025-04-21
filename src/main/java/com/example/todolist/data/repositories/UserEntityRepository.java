@@ -5,6 +5,7 @@ import com.example.todolist.entities.enums.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserEntityRepository extends JpaRepository<UserEntity, Integer> {
 
@@ -15,4 +16,6 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, Integer>
     boolean existsByEmailIgnoreCase(String email);
 
     List<UserEntity> findByRole(Role role);
+
+    Optional<UserEntity> findByUsernameIgnoreCase(String username);
 }

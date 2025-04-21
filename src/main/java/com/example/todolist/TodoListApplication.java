@@ -1,5 +1,7 @@
 package com.example.todolist;
 
+import com.example.todolist.data.repositories.UserEntityRepository;
+import com.example.todolist.entities.UserEntity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -14,6 +16,5 @@ public class TodoListApplication {
 
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
-
     }
 }
