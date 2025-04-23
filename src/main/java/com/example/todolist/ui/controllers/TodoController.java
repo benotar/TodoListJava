@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -75,5 +76,12 @@ public class TodoController {
                 .build();
         todoService.save(todo);
         return "redirect:/todos";
+    }
+
+    @PostMapping("/todo-update-redirect-form")
+    public String todoUpdateRedirect(@RequestParam("todoId") Integer todoId,
+                                     RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("todoId", todoId);
+        return "redirect:/todo-update";
     }
 }

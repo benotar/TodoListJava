@@ -30,28 +30,6 @@ public class UsersController {
         return "users";
     }
 
-    @PostMapping("/add-users-form")
-    public String addUserForm(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("email") String email,
-            @RequestParam("name") String name,
-            @RequestParam("role") String role) {
-        UserEntity userEntity = UserEntity.builder()
-                .username(username)
-                .passwordHash(password)
-                .email(email)
-                .name(name)
-                .role(Role.valueOf(role))
-                .build();
-        userEntityService.save(userEntity);
-        return "redirect:/users";
-    }
-
-//    @PostMapping("/user-update-redirect-form")
-//    public ModelAndView userUpdateRedirect(@RequestParam("userId") Integer userId) {
-//        return new ModelAndView("redirect:/user-update", new ModelMap("userId", userId));
-//    }
 
     @PostMapping("/user-update-redirect-form")
     public String userUpdateRedirect(@RequestParam("userId") Integer userId,
