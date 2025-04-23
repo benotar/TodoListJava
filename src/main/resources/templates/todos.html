@@ -46,6 +46,14 @@
         <td th:text="${todo.user.username}"></td>
         <td th:text="${todo.category.name}"></td>
         <td th:text="${todo.tag.name}"></td>
+        <form th:action="@{/todo-update-redirect-form}" method="post">
+            <input type="hidden" name="todoId" th:value="${todo.id}">
+            <td>
+                <button type="submit">
+                    Update
+                </button>
+            </td>
+        </form>
     </tr>
     </tbody>
 </table>

@@ -8,21 +8,6 @@
 <th:block th:insert="~{fragments/header :: header-fragment}"/>
 
 
-<div class="form-container">
-    <form th:action="@{/add-users-form}" method="post">
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="name" placeholder="Name" required>
-        <select name="role" id="role">
-            <option th:each="roleConst : ${T(com.example.todolist.entities.enums.Role).values()}"
-                    th:value="${roleConst.name()}"
-                    th:utext="${roleConst.name()}"></option>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
-</div>
-
 <h2>Users List</h2>
 <table>
     <thead>

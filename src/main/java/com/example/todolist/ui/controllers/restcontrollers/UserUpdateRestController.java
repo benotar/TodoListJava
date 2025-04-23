@@ -2,7 +2,6 @@ package com.example.todolist.ui.controllers.restcontrollers;
 
 import com.example.todolist.data.dtos.UserUpdateDto;
 import com.example.todolist.data.services.UserEntityService;
-import com.example.todolist.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

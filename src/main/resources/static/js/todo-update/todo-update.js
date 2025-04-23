@@ -1,4 +1,4 @@
-console.log("user-update")
+console.log("todo-update")
 
 const forms=document.querySelectorAll('#form-container form');
 
@@ -15,7 +15,7 @@ function clientUpdate(form){
     console.log(json)
     
     
-    fetch('/rest/user-update-form', {
+    fetch('/rest/todo-update-form', {
         method:'POST',
         headers:{
             'Content-Type':'application/json',

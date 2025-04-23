@@ -47,13 +47,12 @@ public class SecurityConfig {
                         request
                                 .requestMatchers("/",
                                         "/error",
-                                        "/welcome",
                                         "/register",
                                         "/register-form",
                                         "/*.css")
                                 .permitAll()
                                 .requestMatchers("/todos")
-                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
+                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name(), Role.GUEST.name())
                                 .requestMatchers("/users")
                                 .hasAuthority(Role.ADMIN.name())
                                 .anyRequest()
@@ -66,20 +65,6 @@ public class SecurityConfig {
                         logoutConfigurer
                                 .logoutSuccessUrl("/")
                                 .permitAll())
-                //+++
-                //Встановлення власної сторінки авторизації
-                //по адресі /authorization
-                /*.formLogin(formLoginConfigurer ->
-                     formLoginConfigurer
-                           .loginPage("/authorization").permitAll()
-                )*/
-                //Встановлення власної сторінки виходу
-                /*.logout(logoutConfigurer ->
-                     logoutConfigurer
-                           .logoutUrl("/logoutown").permitAll()
-                )*/
-                //
-                //Створення об'єкту SecurityFilterChain
                 .build();
     }
 }

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:insert="~{fragments/settings :: settings-fragment}"/>
+    <title>Todo Update</title>
+</head>
+<body>
+<th:block th:insert="~{fragments/header :: header-fragment}"/>
+<div id="form-container">
+    <form th:action="@{/rest/todo-update-form}" method="post">
+        <input type="hidden" name="id" th:value="${todo.id}">
+    
+        <input type="text" name="title" placeholder="Title" th:value="${todo.title}">
+        <textarea name="description" placeholder="Description"
+                  th:text="${todo.description}"></textarea>
+        <input type="checkbox" name="completed" id="completed"
+               th:checked="${todo.completed}">
+        <label for="completed">Completed</label>
+        <select name="categoryId" id="categoryId" required>
+            <option th:each="category : ${categories}"
+                    th:value="${category.id}"
+                    th:text="${category.name}"
+                    th:selected="${category.id==todo.category.id}"></option>
+        </select>
+        <select name="tagId" id="tagId" required>
+            <option th:each="tag : ${tags}"
+                    th:value="${tag.id}"
+                    th:text="${tag.name}"
+                    th:selected="${tag.id==todo.tag.id}"></option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+<script type="text/javascript" src="js/todo-update/todo-update.js"></script>
+</body>
+</html>
