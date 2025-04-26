@@ -1,6 +1,7 @@
 package com.example.todolist;
 
 import com.example.todolist.data.repositories.UserEntityRepository;
+import com.example.todolist.entities.Todo;
 import com.example.todolist.entities.UserEntity;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
