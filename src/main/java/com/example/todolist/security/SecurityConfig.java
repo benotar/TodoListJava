@@ -45,10 +45,13 @@ public class SecurityConfig {
         return security
                 .authorizeHttpRequests(request ->
                         request
-                                .requestMatchers("/",
-                                        "/error",
+                                .requestMatchers(
+                                        "/",
+                                        "/welcome",
+                                        "/login",
                                         "/register",
                                         "/register-form",
+                                        "/error",
                                         "/*.css")
                                 .permitAll()
                                 .requestMatchers("/todos")
@@ -63,7 +66,7 @@ public class SecurityConfig {
                                 .permitAll())
                 .logout(logoutConfigurer ->
                         logoutConfigurer
-                                .logoutSuccessUrl("/")
+                                .logoutSuccessUrl("/welcome")
                                 .permitAll())
                 .build();
     }

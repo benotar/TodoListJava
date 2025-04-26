@@ -6,8 +6,6 @@
 </head>
 <body>
 <th:block th:insert="~{fragments/header :: header-fragment}"/>
-
-
 <h2>Users List</h2>
 <table>
     <thead>
@@ -22,7 +20,6 @@
         <td><input type="text" th:value="${user.username}" readonly/></td>
         <td><input type="email" th:value="${user.email}" readonly/></td>
         <td th:text="${user.role}"></td>
-
         <form th:action="@{/user-update-redirect-form}" method="post">
             <input type="hidden" name="userId" th:value="${user.id}">
             <td>

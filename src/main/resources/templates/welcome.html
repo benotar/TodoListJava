@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+    <th:block th:replace="fragments/settings :: settings-fragment"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/header :: header-fragment"></nav>
+
+<div class="form-container">
+    <h1>Welcome to TodoList App</h1>
+</div>
+
+</body>
+</html>
