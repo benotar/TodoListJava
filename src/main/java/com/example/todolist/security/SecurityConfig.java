@@ -52,7 +52,7 @@ public class SecurityConfig {
                                         "/*.css")
                                 .permitAll()
                                 .requestMatchers("/todos")
-                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name(), Role.GUEST.name())
+                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers("/users")
                                 .hasAuthority(Role.ADMIN.name())
                                 .anyRequest()
