@@ -6,7 +6,6 @@
 </head>
 <body>
     <th:block th:insert="~{fragments/header :: header-fragment}"/>
-    
 <div class="form-container">
     <form th:action="@{/add-todos-form}" method="post">
         <input type="text" name="title" placeholder="Title" required>

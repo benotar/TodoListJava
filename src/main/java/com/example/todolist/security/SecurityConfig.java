@@ -45,14 +45,17 @@ public class SecurityConfig {
         return security
                 .authorizeHttpRequests(request ->
                         request
-                                .requestMatchers("/",
-                                        "/error",
+                                .requestMatchers(
+                                        "/",
+                                        "/welcome",
+                                        "/login",
                                         "/register",
                                         "/register-form",
+                                        "/error",
                                         "/*.css")
                                 .permitAll()
                                 .requestMatchers("/todos")
-                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name(), Role.GUEST.name())
+                                .hasAnyAuthority(Role.USER.name(), Role.ADMIN.name())
                                 .requestMatchers("/users")
                                 .hasAuthority(Role.ADMIN.name())
                                 .anyRequest()
@@ -63,7 +66,7 @@ public class SecurityConfig {
                                 .permitAll())
                 .logout(logoutConfigurer ->
                         logoutConfigurer
-                                .logoutSuccessUrl("/")
+                                .logoutSuccessUrl("/welcome")
                                 .permitAll())
                 .build();
     }

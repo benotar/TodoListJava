@@ -1,14 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<th:block th:insert="~{fragments/settings :: settings-fragment}"/>
-	<title>Error Page</title>
+    <th:block th:insert="~{fragments/settings :: settings-fragment}"/>
+    <title>Error Page</title>
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .error-container {
+            text-align: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            font-size: 60px;
+            color: #FF6347;
+        }
+
+        h3 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #888;
+            margin-top: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 18px;
+            margin-top: 20px;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .error-container img {
+            width: 150px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
+<div class="error-container">
     <th:block th:insert="~{fragments/header :: header-fragment}"/>
-	<h1>:-(</h1>
-	<h3>Error</h3>
-	<a href="/">Go back to home page</a>
-	<h2 th:utext="${message}"></h2>
+    <h1>:-(</h1>
+    <h3>Something went wrong...</h3>
+    <h2 th:utext="${message}"></h2>
+    <a href="/">Go back to home page</a>
+</div>
 </body>
 </html>

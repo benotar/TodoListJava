@@ -20,7 +20,6 @@ public class Todo {
 
     @PrePersist
     public void prePersist() {
-        completed = false;
         this.createdAt = LocalDate.now();
         if (this.updatedAt == null) {
             this.updatedAt = LocalDate.now();
